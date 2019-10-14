@@ -24,6 +24,9 @@ spec:
   stages {
     stage('Test webui') {
       steps {
+        container('jnlp') {
+          sh 'chmod -R g+w workspace'
+        }
         container('nodejs') {
           git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
           sh 'npm install'
