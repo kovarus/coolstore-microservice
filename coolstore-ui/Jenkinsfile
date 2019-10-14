@@ -13,7 +13,7 @@ metadata:
 spec:
   containers:
   - name: nodejs
-    image: docker-registry.default.svc:5000/openshift/nodejs
+    image: node:8
     command:
     - cat
     tty: true
