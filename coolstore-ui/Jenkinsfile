@@ -27,8 +27,9 @@ spec:
         container('nodejs') {
           dir("coolstore-ui") {
             sh 'npm install'
-            sh 'node server.js'
+            sh 'node server.js &'
           }
+          sh 'curl -f -L localhost:8080'
         }
       }
     }
