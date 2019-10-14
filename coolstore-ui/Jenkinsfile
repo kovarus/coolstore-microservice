@@ -12,13 +12,8 @@ metadata:
     some-label: some-label-value
 spec:
   containers:
-  - name: maven
-    image: maven:alpine
-    command:
-    - cat
-    tty: true
-  - name: busybox
-    image: busybox
+  - name: nodejs
+    image: docker-registry.default.svc:5000/openshift/nodejs
     command:
     - cat
     tty: true
@@ -26,11 +21,11 @@ spec:
     }
   }
   stages {
-    stage('Run maven') {
+    stage('Test webui') {
+      git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
       steps {
-        container('maven') {
-          git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
-          sh 'ls'
+        container('nodejs') {
+          cd 'ls'
           sh 'mvn -version'
         }
         container('busybox') {
