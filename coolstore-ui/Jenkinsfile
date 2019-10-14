@@ -24,12 +24,10 @@ spec:
   stages {
     stage('Test webui') {
       steps {
-        container('jnlp') {
-          sh 'chmod -R g+w /home/jenkins/agent/workspace'
-        }
         container('nodejs') {
           dir("coolstore-ui") {
             sh 'npm install'
+            sh 'node server.js'
           }
         }
       }
