@@ -26,6 +26,7 @@ spec:
       steps {
         container('nodejs') {
           dir("coolstore-ui") {
+            sh 'ls'
             sh 'npm install'
             sh 'node server.js &'
           }
