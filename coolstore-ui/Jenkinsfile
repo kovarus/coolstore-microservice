@@ -36,7 +36,7 @@ spec:
     stage('Deploy webui') {
       steps {
         container('jnlp') {
-          sh 'oc get projects'
+          sh 'oc start-build --follow web-ui -n coolstore-demo'
         }
       }
     }
