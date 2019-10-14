@@ -2,7 +2,7 @@ properties([pipelineTriggers([githubPush()])])
 
 node {
     stage ('Checkout'){
-        git branch: 'exampleBranch', url: 'https://github.com/example-org/example-repo.git'
+        git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
     }
     stage ('Build'){
         // steps
