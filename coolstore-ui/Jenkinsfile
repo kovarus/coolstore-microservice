@@ -33,5 +33,12 @@ spec:
         }
       }
     }
+    stage('Deploy webui') {
+      steps {
+        container('jnlp') {
+          oc get projects
+        }
+      }
+    }
   }
 }
