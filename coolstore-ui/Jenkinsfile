@@ -17,7 +17,7 @@ spec:
     command:
     - cat
     tty: true
-    workingDir: /home/jenkins/agent/workspace/demo-team/coolstore-webui/coolstore-ui
+    workingDir: /home/jenkins/agent/workspace/demo-team
 """
     }
   }
@@ -28,6 +28,9 @@ spec:
           sh 'chmod -R g+w /home/jenkins/agent/workspace'
         }
         container('nodejs') {
+          git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
+          sh 'ls'
+          sh 'cd coolstore-webui/coolstore-ui'
           sh 'npm install'
           sh 'node server.js'
         }
