@@ -32,9 +32,6 @@ spec:
           sh 'npm install'
           sh 'node server.js'
         }
-        container('busybox') {
-          sh '/bin/busybox'
-        }
       }
     }
   }
