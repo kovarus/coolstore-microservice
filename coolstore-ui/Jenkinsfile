@@ -22,11 +22,12 @@ spec:
   }
   stages {
     stage('Test webui') {
-      git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
       steps {
         container('nodejs') {
-          cd 'ls'
-          sh 'mvn -version'
+          git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
+          sh 'cd coolstore-ui'
+          sh 'npm install'
+          sh 'node server.js'
         }
         container('busybox') {
           sh '/bin/busybox'
