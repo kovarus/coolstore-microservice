@@ -38,7 +38,7 @@ spec:
         container('jnlp') {
           sh 'oc start-build --follow web-ui -n coolstore-demo'
           sleep 10
-          sh 'oc rollout status -w dc/web-ui'
+          sh 'oc rollout status -w dc/web-ui -n coolstore-demo'
           sh 'curl -f -L http://web-ui-coolstore-demo.apps.towen-demo-ocp.kpscdemo.io/'
         }
       }
