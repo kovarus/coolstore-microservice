@@ -28,9 +28,9 @@ spec:
           sh 'chmod -R g+w /home/jenkins/agent/workspace'
         }
         container('nodejs') {
-          sh 'ls'
-          sh 'cd coolstore-ui'
-          sh 'npm install'
+          dir("coolstore-ui") {
+            sh 'npm install'
+          }
         }
       }
     }
