@@ -1,13 +1,42 @@
 properties([pipelineTriggers([githubPush()])])
 
-node {
-    stage ('Checkout'){
-        git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
+pipeline {
+  agent {
+    kubernetes {
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: maven
+    image: maven:alpine
+    command:
+    - cat
+    tty: true
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
     }
-    stage ('Build'){
-        // steps
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        container('maven') {
+          git branch: 'stable-ocp-3.11', url: 'https://github.com/kovarus/coolstore-microservice.git'
+          sh 'ls'
+          sh 'mvn -version'
+        }
+        container('busybox') {
+          sh '/bin/busybox'
+        }
+      }
     }
-    stage ('Test'){
-        // steps
-    }
-}   
+  }
+}
