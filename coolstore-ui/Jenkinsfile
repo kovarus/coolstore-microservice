@@ -29,7 +29,8 @@ spec:
         }
         container('nodejs') {
           sh 'ls'
-          sh 'cd coolstore-webui/coolstore-ui'
+          sh 'cd coolstore-ui'
+          sh 'npm install'
         }
       }
     }
